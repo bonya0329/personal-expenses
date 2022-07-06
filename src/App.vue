@@ -12,7 +12,7 @@
     
 
     <v-main>
-       <v-bottom-navigation v-model="value">
+       <v-bottom-navigation>
         <v-btn @click="list">
           <span>List</span>
         </v-btn>

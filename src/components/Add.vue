@@ -2,9 +2,6 @@
   <v-container>
         <v-menu
             ref="menu"
-            v-model="menu"
-            :close-on-content-click="false"
-            :return-value.sync="date"
             transition="scale-transition"
             offset-y
             min-width="auto"
@@ -67,7 +64,7 @@
     
     <div v-show="show_modal">
         <v-alert
-        v-model="alert"
+       
         border="left"
         close-text="Close Alert"
         color="deep-purple accent-4"
@@ -84,6 +81,7 @@
     name: 'Add',
     data: () => ({
         items: [],
+        new_items: [],
         date: '',
         amount: '',
         currency: '',
@@ -91,18 +89,26 @@
         show_modal: false
 
     }),
+    mounted(){
+        var local_items = localStorage.getItem('items')
+        this.items = JSON.parse(local_items)
+    },
     methods:{
         submit(){
             this.show_modal = true
             this.items.push({
                 date: this.date,
-                amount: this.amount,
-                currency: this.currency,
-                product: this.product
+                data: this.amount+ " " +this.currency+ " " + this.product                
             })
             localStorage.setItem('items', JSON.stringify(this.items))
             console.log("Items: ",this.items)
-        }
+        },
+        groupArrayOfObjects(list, key) {
+            return list.reduce(function(rv, x) {
+                (rv[x[key]] = rv[x[key]] || []).push(x);
+                return rv;
+            }, {})
+        },
     }
   }
 </script>
