@@ -27,7 +27,7 @@
                         </v-btn>
                     </v-col>
                 </v-row>
-                
+                <div>{{total}} USD</div>
                 
 
                 <div v-for="(el, e) in Object.values(items)" :key="e">
@@ -93,18 +93,21 @@
                         redirect: 'follow',
                         headers: myHeaders
                     };
+                    //var val = 0
                     console.log("https://api.apilayer.com/fixer/convert?to="+this.to+"&from="+this.from+"&amount="+this.amount+"")
                     fetch("https://api.apilayer.com/fixer/convert?to="+this.to+"&from="+this.from+"&amount="+this.amount+"", requestOptions)
                         .then(response => response.text())
-                        .then(result => arr.push(JSON.parse(result).result) )
+                        .then(result => this.total += Number(JSON.parse(result).result) )
                         .catch(error => console.log('error', error));
                     
                 }else{
-                    arr.push(this.items[dtem][i].data.split(" ")[0])
+                    this.total += Number(this.items[dtem][i].data.split(" ")[0])
                 }
             }
+            console.log(this.total)
             console.log(arr)
         },
+        
         groupArrayOfObjects(list, key) {
             return list.reduce(function(rv, x) {
                 (rv[x[key]] = rv[x[key]] || []).push(x);
