@@ -27,7 +27,7 @@
                         </v-btn>
                     </v-col>
                 </v-row>
-                <div>{{total}} USD</div>
+                
                 
 
                 <div v-for="(el, e) in Object.values(items)" :key="e">
@@ -39,6 +39,7 @@
 
             
             </v-list-item>
+            <div align="center"> Total amount {{total}} USD</div>
         </v-list-item-group>
         </v-list>
         
@@ -77,6 +78,7 @@
     },
     methods: {
         change_curr(dtem){
+            this.total = 0
             console.log(this.items[dtem])
             var arr = []
             for(let i in this.items[dtem]){
@@ -115,6 +117,7 @@
             }, {})
         },
         clear(date){
+            
             console.log(date)
             console.log(this.items)
             
