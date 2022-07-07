@@ -6,6 +6,7 @@
             v-model="selectedItem"
             color="primary"
         >
+            <div align="center"> Total amount {{total}} USD</div>
             <v-list-item
             v-for="(item, i) in Object.keys(items)"
             :key="i"
@@ -39,7 +40,7 @@
 
             
             </v-list-item>
-            <div align="center"> Total amount {{total}} USD</div>
+            
         </v-list-item-group>
         </v-list>
         
